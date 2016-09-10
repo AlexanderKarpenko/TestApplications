@@ -10,11 +10,6 @@ public class LeagueTableEntryTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void checkTableEntryCreationWithInvalidGoalDifference(){
-        new LeagueTableEntry("TestTeam", 0,0,0,0,1,0,2,0);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
     public void checkNegativePlayedArgument() {
         new LeagueTableEntry("TestTeam", -1, 0, 0, 0, 0, 0, 0, 0);
     }
