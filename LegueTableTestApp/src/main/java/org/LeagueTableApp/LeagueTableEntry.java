@@ -1,11 +1,15 @@
 package org.LeagueTableApp;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.util.Objects.requireNonNull;
 
 public class LeagueTableEntry
 {
+    private static final Logger logger = LogManager.getLogger(LeagueTableEntry.class);
     private static final int WIN_POINTS = 3 ;
     private static final int DRAW_POINTS = 1 ;
     private static final int LOSE_POINTS = 0 ;
@@ -54,6 +58,7 @@ public class LeagueTableEntry
         validateIntArgument(goalsAgainst, "goals against");
         validateIntArgument(goalDifference, "goal difference");
         validateIntArgument(points, "points");
+        logger.debug("Arguments of LeagueTableEntry has been validated.");
 
     }
 
@@ -67,6 +72,7 @@ public class LeagueTableEntry
      * @throws ArithmeticException is thrown if there is an integer overflow.
      */
     public void processMatch(Match match) {
+        logger.debug("Processing following " + match + " for team " + teamName);
         increasePlayed();
         increaseGoalsFor(match.getTeamGoalsFor(teamName));
         increaseGoalsAgainst(match.getTeamGoalsAgainst(teamName));
@@ -80,6 +86,7 @@ public class LeagueTableEntry
             increaseLoses();
             addPoints(LOSE_POINTS);
         }
+        logger.debug( match + " for team " + teamName + " has been processed.");
     }
 
     public String getTeamName() {

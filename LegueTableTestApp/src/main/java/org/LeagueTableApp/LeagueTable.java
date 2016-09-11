@@ -1,5 +1,8 @@
 package org.LeagueTableApp;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.*;
 import java.util.concurrent.*;
 
@@ -8,6 +11,7 @@ import static java.util.stream.Collectors.toList;
 
 public class LeagueTable
 {
+    private static final Logger logger = LogManager.getLogger(LeagueTable.class);
     private final List<Match> matches;
     private final Map<String,LeagueTableEntry> leagueTableEntries;
 
@@ -16,6 +20,7 @@ public class LeagueTable
      */
     public LeagueTable( final List<Match> matches )
     {
+        logger.debug("LeagueTable constructor received following argument: " + matches);
         this.matches = matches;
         leagueTableEntries = new ConcurrentHashMap<>(matches.size());
         createAndCalculateLeagueTableEntries();
@@ -23,6 +28,7 @@ public class LeagueTable
 
     private void createAndCalculateLeagueTableEntries() {
         matches.parallelStream().forEach(this::createAndCalculateEntriesForMatch);
+        logger.info("LeagueTableEntries were created and successfully calculated.");
     }
 
     private void createAndCalculateEntriesForMatch(Match match) {

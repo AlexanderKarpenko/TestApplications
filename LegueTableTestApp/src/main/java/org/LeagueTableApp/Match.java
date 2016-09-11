@@ -103,5 +103,15 @@ public class Match {
             return goalsAgainst;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Match{" +
+                "homeTeam='" + homeTeam + '\'' +
+                ", awayTeam='" + awayTeam + '\'' +
+                ", homeScore=" + homeScore +
+                ", awayScore=" + awayScore +
+                '}';
+    }
 }
 
